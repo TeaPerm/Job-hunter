@@ -160,9 +160,6 @@ Négy szolgáltatás van kivezetve:
 
 A végpontok leírását és kipróbálását úgy tehetitek meg legegyszerűbben, ha az alábbi Postman gyűjteményt importáljátok a Postman REST API kliensbe. Ez egy webes alkalmazás, a Postman Agentet lokálisan telepíteni kell, majd a megnyíló alkalmazásban egy új Workspace-t kell létrehozni, és fent megnyomni az "Import" gombot, és egyesével linkként beilleszteni őket:
 
-[Minden szolgáltatás elérhető ezt a linket beillesztve](https://api.postman.com/collections/15151253-f98c9d58-a8e9-4cb4-a4c2-ba0ade3caaac?access_key=PMAT-01HXH44ZMB65PBYGK0W7WQCJSJ)
-
-
 Ha el van indítva a rest-api, kipróbálhatók a végpontok. A felküldendő tartalmak a Body részben vannak előkészítve.
 
 ### users
