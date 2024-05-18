@@ -8,12 +8,21 @@ import {
 } from "@/components/ui/popover";
 import { Filter } from "lucide-react";
 import { Checkbox } from "./ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function JobFilter() {
   return (
-    <Popover>
+    <Popover className="">
       <PopoverTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className="shadow-md">
           <Filter className="w-4 h-4 mr-2" /> Filter
         </Button>
       </PopoverTrigger>
@@ -30,7 +39,7 @@ export function JobFilter() {
               <Label htmlFor="width">Minimum wage</Label>
               <Input
                 id="width"
-                defaultValue="100%"
+                placeholder="100000"
                 className="col-span-2 h-8"
               />
             </div>
@@ -38,23 +47,32 @@ export function JobFilter() {
               <Label htmlFor="maxWidth">Maximum wage</Label>
               <Input
                 id="maxWidth"
-                defaultValue="300px"
+                placeholder="400000"
                 className="col-span-2 h-8"
               />
             </div>
-            <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="height">Job Types</Label>
-              <Input
-                id="height"
-                defaultValue="25px"
-                className="col-span-2 h-8"
-              />
+            <div className="flex justify-between items-center gap-4">
+              <Label>Work Type</Label>
+
+              <Select className="h-8 w-full">
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select a type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Work type</SelectLabel>
+                    <SelectItem value="full-time">Full-time</SelectItem>
+                    <SelectItem value="part-time">Part-time</SelectItem>
+                    <SelectItem value="internship">Internship</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
             <div className="grid grid-cols-3 items-center gap-4">
               <Label htmlFor="maxHeight">Location</Label>
               <Input
                 id="maxHeight"
-                defaultValue="none"
+                placeholder="Budapest"
                 className="col-span-2 h-8"
               />
             </div>

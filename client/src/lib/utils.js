@@ -20,3 +20,28 @@ export function formatPriceForints(price) {
     return formattedIntegerPart + "," + formattedDecimalPart + " Ft";
   }
 }
+
+export const capitalizeFirstLetter = (string) => {
+  if (!string) return "";
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export function formatExperiences(experiences) {
+  if (Array.isArray(experiences)) {
+    return experiences.map(experience => {
+      const interval = `${experience.fromYear}-${experience.toYear}`;
+      return {
+        company: experience.company,
+        title: experience.title,
+        interval: interval
+      };
+    });
+  } else {
+    const interval = `${experiences.fromYear}-${experiences.toYear}`;
+    return {
+      company: experiences.company,
+      title: experiences.title,
+      interval: interval
+    };
+  }
+}
