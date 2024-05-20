@@ -45,3 +45,22 @@ export function formatExperiences(experiences) {
     };
   }
 }
+
+export function formatExperienceData(inputString) {
+  const jobs = inputString.split("\n");
+  const formattedJobs = jobs.map(job => {
+      const [company, title, interval] = job.split(';');
+      return {
+          company,
+          title,
+          interval
+      };
+  });
+  return formattedJobs;
+}
+
+export function getInitials(fullName) {
+  const words = fullName.split(' ');
+  const initials = words.map(word => word.charAt(0).toUpperCase());
+  return initials.join('');
+}

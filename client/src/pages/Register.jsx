@@ -30,16 +30,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { formatExperienceData } from "@/lib/utils";
 
 const formSchema = z.object({
   fullname: z.string().min(1, { message: "Full name cannot be empty!" }),
   email: z.string().email().min(1, { message: "Email cannot be empty!" }),
   password: z.string().min(1, { message: "Password cannot be empty!" }),
-  role: z.string(),
+  role: z.enum(["jobseeker", "company"]),
+  experiences: z.string(),
 });
 
 export function Register() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -48,8 +51,11 @@ export function Register() {
       email: "",
       password: "",
       role: "jobseeker",
+      experiences: "",
     },
   });
+
+  const role = form.watch("role");
 
   const registerMutation = useMutation({
     mutationFn: (data) => {
@@ -66,12 +72,15 @@ export function Register() {
     },
     onSuccess: async (response) => {
       const res = await response.json();
-      navigate("/login")
+      navigate("/login");
     },
   });
 
+
   async function onSubmit(values) {
     registerMutation.mutate(values);
+    // console.log(formatExperienceData(values.experiences))
+    // console.log(values)
   }
 
   return (
@@ -168,6 +177,27 @@ export function Register() {
                   )}
                 />
               </div>
+              {role === "jobseeker" && (
+                <div className="grid gap-2">
+                  <FormField
+                    control={form.control}
+                    name="experiences"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Experiences</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            className="h-48"
+                            placeholder="Halo Haven;Front-end fejlesztő;2021-2022"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              )}
               <Button type="submit" className="w-full">
                 Create an account
               </Button>

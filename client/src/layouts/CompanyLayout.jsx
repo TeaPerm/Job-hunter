@@ -4,13 +4,14 @@ import { removeAccessToken } from "@/redux/authSlice";
 import { BriefcaseBusiness, Building2 } from "lucide-react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CompanyLayout = ({ children }) => {
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.accessToken);
   const userId = useSelector((state) => state.auth.userId);
   const role = useSelector((state) => state.auth.role);
+  const navigate = useNavigate()
   
   const handleLogout = () => {
     dispatch(removeAccessToken());
@@ -18,7 +19,7 @@ const CompanyLayout = ({ children }) => {
 
   return (
     <main>
-      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <header className="sticky z-20 top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <nav className="w-full justify-between flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           <div className="flex items-center">
             <Link
@@ -32,6 +33,12 @@ const CompanyLayout = ({ children }) => {
               className="text-foreground transition-colors hover:text-foreground ml-4"
             >
               Job Listings
+            </Link>
+            <Link
+              to="/jobs/create"
+              className="text-foreground transition-colors hover:text-foreground ml-4"
+            >
+              Add a new job
             </Link>
           </div>
           <div className="items-center flex">
@@ -50,8 +57,7 @@ const CompanyLayout = ({ children }) => {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/profile")}>Profile</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="cursor-pointer" onClick={() => handleLogout()}>Logout</DropdownMenuItem>
             </DropdownMenuContent>

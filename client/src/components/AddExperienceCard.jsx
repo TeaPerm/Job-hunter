@@ -1,10 +1,6 @@
 import { PlusCircle, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -17,12 +13,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
-import {
-  Form,
-  FormControl,
-  FormItem,
-  FormMessage,
-} from "./ui/form";
+import { Form, FormControl, FormItem, FormMessage } from "./ui/form";
 import { useMutation } from "@tanstack/react-query";
 import { API_URL } from "@/lib/constants";
 import { formatExperiences } from "@/lib/utils";
@@ -153,12 +144,14 @@ export default function AddExperienceCard() {
                         <FormMessage />
                       </FormItem>
                     </TableCell>
-                    <TableCell
-                      className="cursor-pointer"
-                      onClick={() => remove(index)}
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </TableCell>
+                    {fields.length > 1 && (
+                      <TableCell
+                        className="cursor-pointer"
+                        onClick={() => remove(index)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </TableCell>
+                    )}
                   </TableRow>
                 ))}
               </TableBody>

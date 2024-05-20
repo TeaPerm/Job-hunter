@@ -28,8 +28,6 @@ const Index = () => {
     return <Loading />;
   }
 
-  console.log(data)
-
   return (
     <div className="px-8 py-4">
       <div className="mb-4">
@@ -42,7 +40,11 @@ const Index = () => {
           <JobFilter />
         </div>
       </div>
-      {data.total === 0 ? <div>No jobs found.</div> : <JobsTable jobs={data.data} />}
+      {data.total === 0 ? (
+        <div>No jobs found.</div>
+      ) : (
+        <JobsTable jobs={data.data} />
+      )}
     </div>
   );
 };

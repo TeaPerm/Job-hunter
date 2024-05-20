@@ -11,6 +11,9 @@ import JobDetails from "./pages/JobDetails";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import Profile from "./components/Profile";
+import { Toaster } from "sonner";
+import { JobCreate } from "./pages/JobCreate";
+import { JobEdit } from "./pages/JobEdit";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +56,22 @@ const router = createBrowserRouter([
       </Layout>
     ),
   },
+  {
+    path: "/jobs/create",
+    element: (
+      <Layout>
+        <JobCreate />
+      </Layout>
+    ),
+  },
+  {
+    path: "/jobs/:jobId/edit",
+    element: (
+      <Layout>
+        <JobEdit />
+      </Layout>
+    ),
+  },
 ]);
 
 const queryClient = new QueryClient();
@@ -62,6 +81,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <RouterProvider router={router} />
+        <Toaster closeButton richColors/>
       </Provider>
     </QueryClientProvider>
   </React.StrictMode>

@@ -23,6 +23,7 @@ import { useMutation } from "@tanstack/react-query";
 import { API_URL } from "@/lib/constants";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "@/redux/authSlice";
+import { useState } from "react";
 
 const formSchema = z.object({
   email: z.string().email().min(1, { message: "Email cannot be empty!" }),
@@ -30,9 +31,9 @@ const formSchema = z.object({
 });
 
 export function Login() {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -45,7 +46,6 @@ export function Login() {
   const loginMutation = useMutation({
     mutationFn: (data) => {
       data.strategy = "local";
-      console.log(data);
       return fetch(API_URL + "/authentication", {
         method: "POST",
         headers: {
@@ -54,13 +54,15 @@ export function Login() {
         body: JSON.stringify(data),
       });
     },
-    onError: (err) => {
-      console.log(err);
-    },
-    onSuccess:async (response) => {
+    onSuccess: async (response) => {
       const res = await response.json();
-      navigate("/")
-      dispatch(setAccessToken(res))
+      console.log(res);
+      if (res.code >= 400) {
+        setError(res.message);
+      } else {
+        navigate("/");
+        dispatch(setAccessToken(res));
+      }
     },
   });
 
@@ -77,6 +79,7 @@ export function Login() {
             <CardDescription>
               Enter your email below to login to your account
             </CardDescription>
+            <FormMessage>{error}</FormMessage>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4">
