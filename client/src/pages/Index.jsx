@@ -1,4 +1,3 @@
-import Example from "@/components/Example";
 import { API_URL } from "@/lib/constants";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
@@ -15,8 +14,8 @@ const Index = () => {
     queryKey: ["jobs", searchQuery],
     queryFn: async () => {
       const response = await fetch(
-        `${API_URL}/jobs${
-          searchQuery ? `?company[$like]=%${searchQuery}%` : ""
+        `${API_URL}/jobs?$limit=10&$skip=0${
+          searchQuery ? `company[$like]=%${searchQuery}%` : ""
         }`
       );
       const data = response.json();
