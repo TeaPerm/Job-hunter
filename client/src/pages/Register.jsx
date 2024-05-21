@@ -38,7 +38,7 @@ const formSchema = z.object({
   email: z.string().email().min(1, { message: "Email cannot be empty!" }),
   password: z.string().min(1, { message: "Password cannot be empty!" }),
   role: z.enum(["jobseeker", "company"]),
-  experiences: z.string(),
+  // experiences: z.string(),
 });
 
 export function Register() {
@@ -51,7 +51,7 @@ export function Register() {
       email: "",
       password: "",
       role: "jobseeker",
-      experiences: "",
+      // experiences: "",
     },
   });
 
@@ -72,6 +72,7 @@ export function Register() {
     },
     onSuccess: async (response) => {
       const res = await response.json();
+      console.log(res)
       navigate("/login");
     },
   });

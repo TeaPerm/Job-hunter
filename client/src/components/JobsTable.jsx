@@ -18,7 +18,7 @@ import JobsTableRow from "./JobsTableRow"
 export default function JobsTable({jobs}) {
 
   return (
-    <Card>
+    <Card className="my-4">
       <CardContent>
         <Table>
           <TableHeader>
