@@ -33,7 +33,7 @@ export default function JobApplicants() {
     return <Loading />;
   }
 
-  if (data.length === 0) {
+  if (data.length === 0 || !data) {
     return <div>There are no applicants for this job yet.</div>;
   }
 
